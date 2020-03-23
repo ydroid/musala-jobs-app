@@ -1,4 +1,33 @@
-# musala work test app
+# Musala Jobs App
+
+Musala Jobs is a Platform for project management. The main mission of this platform is to manage projects in a clean and simple way. Just by entering a name and description You can manage your projects, from the "dashboard/profile" screen only with a name, description and type of project you will be ready to publish your project.
+
+As a user you can “Ask” a project and you can manage the projects you are working on in the "Worked On" tab on the same "dashboard/profile" screen and update the completed tasks in it. 
+The system will receive new customers with a landing page with our plans and a project finder that will list the projects to users, to access the most detailed information of the projects must be registered in our system.
+
+Only projects that don't have any users working will be available.
+To speed up adoption and simplify user registration on the system, we've added sign-up/login functionality with a Google account. 
+
+At startup the system will have an administrator user who can manage the users of the platform, the roles that users will have, the administrator will also be able to manage all the projects in the system.
+
+The Administrator Role will have access to the entire system, while users will only have access to project information. Unauthenticated users on the system will only be able to list projects from the landing page, only a project owner will be able to handle project information, while a user working on a project will only have access to modify the tasks Completed.
+
+Each user will have a profile where their projects and projects will be listed on what they are working on, as well as the ability to edit their data.
+
+## Architecture
+
+The system is designed to store all user and project data in a database using mongoDB, a [backend](https://github.com/ydroid/musala-jobs-api) where business logic is focused and exposed through a REST service interface using NodeJS and the Loopback framework and a user interface or FrontEnd built in Angular 9+. Each layer is independent and interacts with each other.
+
+## Deployment
+
+The system is currently deployed and ready for operation. It can be accessed from this [address](https://musala-52db9.web.app/). The distribution of the systems was done in this way. The database is located in the [cloud of mongoDB](https://cloud.mongodb.com/), the Backend running on a Heroku dyno and rest services can be accessed by this [address](https://musala-jobs.herokuapp.com/explorer/), and the FrontEnd is deployed using Firebase and is accessible from this [address](https://musala-52db9.web.app/) already mentioned above. To store users' images, we use Firebase's cloud storage feature. 
+
+The system is kept up to date by a series of continues integration operations. We configured those actions in the different clouds and which I explain below.
+
+The backend takes care of it only to keep the database schema up-to-date, and to keep the Backend system up-to-date we integrate Heroku into the repository on GitHub and it will be built and deployed whenever there are new changes to the master branch.
+
+For the FrontEnd we configured a CI/CD using GitHub Actions, we had to enter in the secret information vault of the repo the Firebase API key so that it was safe so that it could deploy for Firebase automatically and securely.
+
 
 This project was generated with [ngX-Rocket](https://github.com/ngx-rocket/generator-ngx-rocket/)
 version 7.1.0
@@ -24,9 +53,21 @@ dist/                        web app production build
 docs/                        project docs and coding guides
 e2e/                         end-to-end tests
 src/                         project source code
+|- animations                animations files
 |- app/                      app components
+|  |- about                  About Page
+|  |- admin-panel            Admin Panel Page    
 |  |- core/                  core module (singleton services and single-use components)
+|  |- dashboard              DashBoard Page
+|  |- errors                 Errors Page
+|  |- home                   Home Page
+|  |- login                  Login Page
+|  |- profile                User Profile Page
+|  |- project                Project Details Page
+|  |- projects               Projects List Page on public area
+|  |- register               User Sign in Page
 |  |- shared/                shared module  (common components, directives and pipes)
+|  |- shell                  Scafold of the private area
 |  |- app.component.*        app root component (shell)
 |  |- app.module.ts          app root module definition
 |  |- app-routing.module.ts  app routes
@@ -54,8 +95,7 @@ Task automation is based on [NPM scripts](https://docs.npmjs.com/misc/scripts).
 | `npm run serve:sw`                              | Run test server on `http://localhost:4200/` with service worker enabled                                          |
 | `npm run build [-- --configuration=production]` | Lint code and build web app for production (with [AOT](https://angular.io/guide/aot-compiler)) in `dist/` folder |
 | `npm test`                                      | Run unit tests via [Karma](https://karma-runner.github.io) in watch mode                                         |
-| `npm run test:ci`                               | Lint code and run unit tests once for continuous integration                                                     |
-| `npm run e2e`                                   | Run e2e tests using [Protractor](http://www.protractortest.org)                                                  |
+| `npm run test:ci`                               | Lint code and run unit tests once for continuous integration                                                     |                                                  |
 | `npm run lint`                                  | Lint code                                                                                                        |
 | `npm run translations:extract`                  | Extract strings from code and templates to `src/app/translations/template.json`                                  |
 | `npm run docs`                                  | Display project documentation and coding guides                                                                  |
