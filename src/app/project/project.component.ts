@@ -69,12 +69,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
       this.project = data;
       this.owner = this.project.owner;
       this.getAvatarUrl();
-      this.owner.avatarUrl = null;
     });
   }
   private getAvatarUrl() {
     const pattern = /^((http|https|ftp):\/\/)/;
     if (this.owner && this.owner.avatarUrl && !pattern.test(this.owner.avatarUrl)) {
+      this.owner.avatarUrl = null;
       const fileRef = this.storage.ref(this.owner.avatarUrl);
       fileRef.getDownloadURL().subscribe(
         downloadURL => {
