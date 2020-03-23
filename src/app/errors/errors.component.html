@@ -1,0 +1,18 @@
+<div class="full-width mat-typography" fxFill id="errors" fxLayout="column">
+  <app-bar></app-bar>
+  <div class="content" fxLayout="column" fxLayoutAlign="center center">
+    <div class="error-code">401</div>
+
+    <div class="message">
+      Sorry but you have insufficient permits <br />to navigate to the page you are looking for.
+    </div>
+
+    <a class="back-link" [routerLink]="'/dashboard'">
+      <mat-icon>logout</mat-icon>
+      Go back to dashboard
+    </a>
+    <div class="copyright" fxLayout="column" fxLayoutAlign="center">
+      <span>&copy; 2020 Musala-Soft Job Test | All rigths reserved</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div id="userList" class="container mat-typography">
+  <!-- CONTENT -->
+  <div class="content">
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <mat-form-field>
+        <input matInput [formControl]="searchTerm" placeholder="Search..." />
+        <button mat-icon-button matSuffix (click)="resetFilters()" *ngIf="searchTerm.value.trim() !== ''">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+      <div fxFlex></div>
+      <button mat-raised-button color="primary" (click)="addUser()">
+        <mat-icon>person_add</mat-icon>
+        Add User
+      </button>
+    </div>
+    <mat-table [dataSource]="results" matSort [@animateStagger]="{ value: '50' }">
+      <!-- Column First Name -->
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> <span>First Name</span> </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span>{{ row.firstName }}</span>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Column Last Name -->
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> <span>Last Name</span> </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span>{{ row.lastName }}</span>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Column Email -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> <span>Email</span> </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span>{{ row.email }}</span>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Column Role -->
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> <span>Role</span> </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span>{{ row.roleMapping?.role.name }}</span>
+          <mat-icon style="cursor: pointer" [matMenuTriggerFor]="menu">arrow_drop_down</mat-icon>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngFor="let role of roles" (click)="updateRole(row, role.id)">
+              <span>{{ role.name }}</span>
+            </button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Column Actions -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> <span>Actions</span> </mat-header-cell>
+        <mat-cell *matCellDef="let row" matTooltip="Actions">
+          <div>
+            <button mat-button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editUser(row)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item (click)="deleteUser(row.id)">
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row
+        class="element-row"
+        *matRowDef="let row; columns: displayedColumns"
+        (mouseover)="row.hovered = true"
+        (mouseout)="row.hovered = false"
+        [@animate]="{ value: '*', params: { y: '100%' } }"
+      ></mat-row>
+    </mat-table>
+    <app-paginator
+      [showing]="showing"
+      [length]="total"
+      [pageSize]="perPage"
+      [resetPage]="resetPage.asObservable()"
+      (changeEvent)="pageChange($event)"
+    >
+    </app-paginator>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="mat-typography">
+  <h2 mat-dialog-title>{{ options.title }}</h2>
+  <mat-dialog-content>
+    <span>
+      {{ options.content }}
+    </span>
+  </mat-dialog-content>
+
+  <mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="5px">
+    <button mat-flat-button color="primary" (click)="accept()">
+      {{ options.yesBtnText == null ? 'Yes' : options.yesBtnText }}
+    </button>
+
+    <button
+      mat-stroked-button
+      color="primary"
+      *ngIf="options.showNoBtn == null || options.showNoBtn == true"
+      (click)="cancel()"
+    >
+      {{ options.noBtnText == null ? 'No' : options.noBtnText }}
+    </button>
+  </mat-dialog-actions>
+</div>

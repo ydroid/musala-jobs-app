@@ -1,0 +1,19 @@
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="px">
+  <div fxFlex="50%" fxShow="false" fxShow.gt-sm>
+    <span *ngIf="showInfoText" class="results">
+      Showing {{ showing }} of <span>{{ length }} results</span>
+    </span>
+  </div>
+  <div fxLayoutAlign="center" fxLayoutAlign.gt-sm="end" [ngClass]="{ 'full-width': isMobile, 'half-width': !isMobile }">
+    <mat-paginator
+      #paginator
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      [showFirstLastButtons]="showFirstAndLastBtns"
+      (page)="onPage($event)"
+      [hidePageSize]="isMobile"
+    >
+    </mat-paginator>
+  </div>
+</div>

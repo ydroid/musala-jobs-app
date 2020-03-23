@@ -1,0 +1,21 @@
+<div class="full-width mat-typography" id="projectsList" fxLayout="column" fxLayoutAlign="start">
+  <app-bar></app-bar>
+  <div class="header" fxLayout="column" fxLayoutAlign="start center">
+    <mat-icon outline class="hero-icon">school</mat-icon>
+    <div class="hero-text mb-16">
+      <h1 [@animate]="{ value: '*', params: { delay: '100ms', y: '25px' } }">Jobs Network System</h1>
+      <span [@animate]="{ value: '*', params: { delay: '100ms', y: '25px' } }">Musala Jobs Practical Test</span>
+    </div>
+    <div class="search mat-elevation-z7" fxLayout="row" fxLayoutAlign="start center">
+      <mat-icon (click)="reSearch()">search</mat-icon>
+      <input [formControl]="searchTerm" placeholder="Search in Jobs..." fxFlex (keydown.enter)="reSearch()" />
+    </div>
+  </div>
+  <div class="projects-wrap" fxLayout="row" fxLayoutAlign="center start">
+    <app-project-list
+      [projectList]="projects"
+      [projectsAlign]="'center center'"
+      [align]="'center center'"
+    ></app-project-list>
+  </div>
+</div>

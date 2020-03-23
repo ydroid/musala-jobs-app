@@ -1,0 +1,39 @@
+@import "src/theme/theme-variables";
+
+#admin-panel {
+  .header {
+    height: 220px;
+    min-height: 220px;
+    max-height: 220px;
+    background: rgb(51, 63, 192);
+    background: url("/assets/summer.jpg") no-repeat;
+    background-size: cover;
+    padding: 24px;
+  }
+  .name {
+    font-size: 34px;
+    line-height: normal;
+    color: #ffffff;
+    text-shadow: 2px 2px black;
+    @include media-breakpoint("sm") {
+      margin-bottom: 32px;
+    }
+  }
+  .actions {
+    button {
+      text-transform: none;
+      padding: 0 16px;
+      margin: 0 0 0 8px;
+    }
+  }
+  .content {
+    flex: 1;
+    mat-tab-group {
+      height: 100%;
+      padding: 0 24px;
+      .mat-tab-body-wrapper {
+        flex-grow: 1;
+      }
+    }
+  }
+}

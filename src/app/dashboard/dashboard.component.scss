@@ -1,0 +1,33 @@
+@import "src/theme/theme-variables";
+
+#projectList {
+  .header {
+    height: 220px;
+    width: 100%;
+    min-height: 220px;
+    max-height: 220px;
+    background: url("/assets/autumn.jpg") no-repeat;
+    background-size: cover;
+    padding: 24px;
+  }
+  .name {
+    font-size: 34px;
+    line-height: normal;
+    color: #ffffff;
+    text-shadow: 2px 1px black;
+    @include media-breakpoint("sm") {
+      margin-bottom: 32px;
+    }
+  }
+  .actions {
+    button {
+      text-transform: none;
+      padding: 0 16px;
+      margin: 0 0 0 8px;
+    }
+  }
+  .content {
+    flex: 1;
+    padding: 10px 24px;
+  }
+}

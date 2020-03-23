@@ -1,0 +1,159 @@
+<div id="project" class="page-layout simple tabbed mat-typography">
+  <!-- HEADER -->
+  <div
+    class="header"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayout.gt-sm="row"
+    fxLayoutAlign.gt-sm="space-between end"
+  >
+    <div
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="start center"
+      [@animate]="{ value: '*', params: { delay: '50ms', scale: '0.2' } }"
+    >
+      <div fxLayout="column">
+        <div class="name">
+          {{ project?.title }}
+        </div>
+
+        <div class="subtitle">
+          {{ project?.projectType?.name }}
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="actions"
+      fxLayout="row"
+      fxLayoutAlign="end center"
+      [@animate]="{ value: '*', params: { delay: '200ms' } }"
+    >
+      <button mat-raised-button color="primary" *ngIf="account?.id === project?.ownerId" (click)="editProject()">
+        <mat-icon>edit</mat-icon>
+        Edit Project
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="account?.id !== project?.ownerId && !project?.workedId"
+        (click)="askProject()"
+      >
+        <mat-icon>edit</mat-icon>
+        Ask Project
+      </button>
+    </div>
+  </div>
+  <!-- / HEADER -->
+  <div class="content" fxLayout="column" fxLayoutAlign="start start" fxFill>
+    <div class="cards" fxLayout="row grap" fxLayoutGap="14px">
+      <div
+        class="card-widget"
+        [@animate]="{ value: '*', params: { y: '100%' } }"
+        class="widget"
+        fxLayout="column"
+        fxFlex="100"
+        fxFlex.gt-xs="50"
+        fxFlex.gt-md="25"
+      >
+        <!-- Front -->
+        <div class="front">
+          <div class="header-card" fxLayout="row" fxLayoutAlign="space-between center">
+            <div *ngIf="owner?.avatarUrl">
+              <ngx-avatar size="32" [src]="owner?.avatarUrl"></ngx-avatar>
+            </div>
+            <div *ngIf="!owner?.avatarUrl">
+              <ngx-avatar size="32" [name]="owner?.firstName + ' ' + owner?.lastName"></ngx-avatar>
+            </div>
+            <button mat-icon-button fuseWidgetToggle aria-label="more">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </div>
+          <div class="content" fxLayout="column" fxLayoutAlign="center center">
+            <div class="task-text gray">
+              {{ project?.owner?.firstName }}
+            </div>
+            <div class="secondary-text">{{ project?.owner?.lastName }}</div>
+          </div>
+
+          <div class="p-16 border-top" fxLayout="row" fxLayoutAlign="start center">
+            <span class="secondary-text text-truncate"> Total Projects: </span>
+            <span class="h4 ml-8">{{ project?.owner?.projects?.length || 0 }} </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card-widget"
+        [@animate]="{ value: '*', params: { y: '100%' } }"
+        class="widget"
+        fxLayout="column"
+        fxFlex="100"
+        fxFlex.gt-xs="50"
+        fxFlex.gt-md="25"
+      >
+        <!-- Front -->
+        <div class="front">
+          <div class="header-card" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="h3">Total</div>
+            <button mat-icon-button fuseWidgetToggle aria-label="more">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </div>
+
+          <div class="content" fxLayout="column" fxLayoutAlign="center center">
+            <div class="task-text red">
+              {{ project?.tasks || 0 }}
+            </div>
+            <div class="secondary-text">DUE TASKS</div>
+          </div>
+
+          <div class="p-16 border-top" fxLayout="row" fxLayoutAlign="start center">
+            <span class="secondary-text text-truncate"> Completed: </span>
+            <span class="h4 ml-8">{{ project?.completedTasks || 0 }} </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card-widget"
+        [@animate]="{ value: '*', params: { y: '100%' } }"
+        class="widget"
+        fxLayout="column"
+        fxFlex="100"
+        fxFlex.gt-xs="50"
+        fxFlex.gt-md="25"
+      >
+        <!-- Front -->
+        <div class="front">
+          <div class="header-card" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="h3">Money</div>
+            <button mat-icon-button fuseWidgetToggle aria-label="more">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </div>
+
+          <div class="content" fxLayout="column" fxLayoutAlign="center center">
+            <div class="task-text blue">
+              {{ project?.price || 0 }}
+            </div>
+            <div class="secondary-text">TOTAL PRICE</div>
+          </div>
+
+          <div class="p-16 border-top" fxLayout="row" fxLayoutAlign="start center">
+            <span class="secondary-text text-truncate"> Income: </span>
+            <span class="h4 ml-8">{{ (project?.price || 0) - (project?.completedTasks || 0) * 5 | currency }} </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="description" fxLayout="column">
+      <div class="header-card" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="h3">Description</div>
+      </div>
+      <div class="content" fxLayout="column" fxLayoutAlign="center start">
+        {{ project?.description }}
+      </div>
+    </div>
+  </div>
+</div>

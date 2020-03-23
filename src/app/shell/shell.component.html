@@ -1,0 +1,78 @@
+<div fxFlex>
+  <mat-sidenav-container fxFill>
+    <mat-sidenav
+      #sidenav
+      [mode]="isMobile ? 'over' : 'side'"
+      [opened]="!isMobile"
+      [disableClose]="!isMobile"
+      ngClass.gt-sm="has-border"
+    >
+      <mat-toolbar color="primary">
+        <span routerLink="/home" style="cursor: pointer;">Musala Jobs</span>
+      </mat-toolbar>
+      <nav>
+        <mat-list>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="/all-projects" routerLinkActive="active" (click)="isMobile && sidenav.close()">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+          </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="/dashboard" routerLinkActive="active" (click)="isMobile && sidenav.close()">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
+          </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="/about" routerLinkActive="active" (click)="isMobile && sidenav.close()">
+            <mat-icon>help_outline</mat-icon>
+            <span>About</span>
+          </a>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </nav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary" class="mat-elevation-z6 app-bar">
+        <button class="menu-button" mat-icon-button (click)="sidenav.toggle()" fxHide.gt-sm>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>{{ title }}</span>
+        <div fxFlex></div>
+        <div>
+          <div style="cursor: pointer;">
+            <div *ngIf="account?.avatarUrl">
+              <ngx-avatar size="32" [src]="account?.avatarUrl" [matMenuTriggerFor]="userMenu"></ngx-avatar>
+            </div>
+            <div *ngIf="!account?.avatarUrl">
+              <ngx-avatar
+                size="32"
+                [name]="account?.firstName + ' ' + account?.lastName"
+                [matMenuTriggerFor]="userMenu"
+              ></ngx-avatar>
+            </div>
+          </div>
+          <mat-menu #userMenu="matMenu">
+            <mat-list>
+              <mat-list-item>
+                <span>Logged in as</span>&nbsp;<b>{{ account?.firstName }}</b>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </mat-list>
+            <button mat-menu-item routerLink="/profile"><mat-icon>account_circle</mat-icon>Profile</button>
+            <button mat-menu-item routerLink="/admin-panel" *ngIf="account?.roleMapping?.role?.name === 'Admin'">
+              <mat-icon>settings</mat-icon>
+              Admin Panel
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>logout</mat-icon>
+              Logout
+            </button>
+          </mat-menu>
+        </div>
+      </mat-toolbar>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

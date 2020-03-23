@@ -1,0 +1,62 @@
+@import "src/theme/theme-variables";
+
+.content {
+  flex: 1;
+  padding: 10px 0;
+  mat-table {
+    mat-row {
+      cursor: pointer;
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    .mat-column-title {
+      &.striped {
+        border-left: 4px solid;
+        &.Android-bg {
+          border-left-color: mat-color($mat-green, 500);
+        }
+        &.Desktop-bg {
+          border-left-color: mat-color($mat-blue, 500);
+        }
+        &.Cloud-bg {
+          border-left-color: mat-color($mat-blue-grey, 500);
+        }
+        &.Net-bg {
+          border-left-color: mat-color($mat-red, 800);
+        }
+        &.Firebase-bg {
+          border-left-color: mat-color($mat-amber, 800);
+        }
+        &.Web-bg {
+          border-left-color: mat-color($mat-purple, 800);
+        }
+      }
+    }
+
+    .mat-column-actions {
+      flex: 0 1 80px;
+    }
+
+    .mat-column-description,
+    .mat-column-completedTasks {
+      @include media-breakpoint("lt-lg") {
+        display: none;
+      }
+    }
+
+    .mat-column-type,
+    .mat-column-tasks {
+      @include media-breakpoint("lt-md") {
+        display: none;
+      }
+    }
+
+    .mat-column-price {
+      @include media-breakpoint("lt-sm") {
+        display: none;
+      }
+    }
+  }
+}

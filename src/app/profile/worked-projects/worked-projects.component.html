@@ -1,0 +1,65 @@
+<!-- CONTENT -->
+<div class="content">
+  <mat-form-field>
+    <input matInput [formControl]="searchTerm" placeholder="Search..." />
+    <button mat-icon-button matSuffix (click)="resetFilters()" *ngIf="searchTerm.value.trim() !== ''">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-table [dataSource]="workedProjects" matSort [@animateStagger]="{ value: '50' }">
+    <!-- Column Title -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> <span>Project</span> </mat-header-cell>
+      <mat-cell
+        class="striped"
+        (click)="projectDetails(row.id)"
+        *matCellDef="let row"
+        [ngClass]="row.projectType?.name + '-bg'"
+      >
+        {{ row.title }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column Description -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> <span>Description</span> </mat-header-cell>
+      <mat-cell (click)="projectDetails(row.id)" *matCellDef="let row">
+        {{ row.description }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column Tasks -->
+    <ng-container matColumnDef="tasks">
+      <mat-header-cell *matHeaderCellDef> <span>Tasks</span> </mat-header-cell>
+      <mat-cell (click)="projectDetails(row.id)" *matCellDef="let row">
+        <span>{{ row.tasks }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column completed tasks -->
+    <ng-container matColumnDef="completedTasks">
+      <mat-header-cell *matHeaderCellDef> <span>Completed Tasks</span> </mat-header-cell>
+      <mat-cell *matCellDef="let row" (click)="editTask(row)">
+        <mat-icon>edit</mat-icon>
+        <span>{{ row.completedTasks }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      class="element-row"
+      *matRowDef="let row; columns: displayedColumns"
+      (mouseover)="row.hovered = true"
+      (mouseout)="row.hovered = false"
+      [@animate]="{ value: '*', params: { y: '100%' } }"
+    ></mat-row>
+  </mat-table>
+  <app-paginator
+    [showing]="showing"
+    [length]="total"
+    [pageSize]="perPage"
+    [resetPage]="resetPage.asObservable()"
+    (changeEvent)="pageChange($event)"
+  >
+  </app-paginator>
+</div>

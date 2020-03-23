@@ -1,0 +1,42 @@
+<div id="projectList" class="container mat-typography" fxLayout="column" fxLayoutAlign="center start">
+  <!-- HEADER -->
+  <div
+    class="header"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    fxLayout.gt-sm="row"
+    fxLayoutAlign.gt-sm="space-between end"
+  >
+    <div
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      fxLayout.gt-sm="row"
+      [@animate]="{ value: '*', params: { delay: '50ms', scale: '0.2' } }"
+    >
+      <div fxLayout="column">
+        <div class="name">
+          Projects
+        </div>
+      </div>
+    </div>
+
+    <div class="actions" fxLayout="row" fxLayoutAlign="end end" [@animate]="{ value: '*', params: { delay: '200ms' } }">
+      <button mat-raised-button color="primary" (click)="addProject()">
+        <mat-icon>launch</mat-icon>
+        Add Project
+      </button>
+    </div>
+  </div>
+  <!-- / HEADER -->
+  <!-- CONTENT -->
+  <div class="content" fxLayout="column" fxLayoutAlign="start start">
+    <mat-form-field>
+      <input matInput [formControl]="searchTerm" placeholder="Search..." (keydown.enter)="loadData()" />
+      <button mat-icon-button matSuffix (click)="resetFilters()" *ngIf="searchTerm.value.trim() !== ''">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button mat-icon-button matSuffix (click)="loadData()"><mat-icon>search</mat-icon></button>
+    </mat-form-field>
+    <app-project-list [projectList]="projects" [align]="'start start'"></app-project-list>
+  </div>
+</div>

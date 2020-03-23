@@ -1,0 +1,46 @@
+<div class="mat-typography">
+  <h2 mat-dialog-title>{{ data.project ? 'Edit project' : 'Add project' }}</h2>
+  <form (ngSubmit)="save()" [formGroup]="projectForm" novalidate>
+    <mat-dialog-content fxLayout="column" fxLayoutGap="5px">
+      <mat-form-field>
+        <input formControlName="title" matInput placeholder="Title" maxlength="30" />
+        <mat-error>Title is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          style="height: 150px;"
+          cdkTextareaAutosize
+          formControlName="description"
+          matInput
+          placeholder="Description"
+        ></textarea>
+        <mat-error>Description is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="projectTypeId" placeholder="Type">
+          <mat-option *ngFor="let item of projectTypes" [value]="item.id">{{ item.name }}</mat-option>
+        </mat-select>
+        <mat-error>
+          <span>Type is required</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" formControlName="price" matInput placeholder="Price" />
+        <mat-error>Price is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" formControlName="tasks" matInput placeholder="Tasks" />
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" formControlName="completedTasks" matInput placeholder="Completed Tasks" />
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="5px">
+      <button mat-raised-button color="primary" [disabled]="projectForm.invalid || isLoading">
+        <app-loader class="inline-loader" [isLoading]="isLoading" size="0.75"></app-loader>
+        <span>Save</span>
+      </button>
+      <button mat-raised-button type="button" (click)="close(false)">Close</button>
+    </mat-dialog-actions>
+  </form>
+</div>

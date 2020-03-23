@@ -1,0 +1,107 @@
+<!-- CONTENT -->
+<div class="content">
+  <div fxLayout="row" fxLayoutAlign="start start">
+    <mat-form-field>
+      <input matInput [formControl]="searchTerm" placeholder="Search..." />
+      <button mat-icon-button matSuffix (click)="resetFilters()" *ngIf="searchTerm.value.trim() !== ''">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+    <div fxFlex></div>
+    <button mat-raised-button color="primary" (click)="addProject()">
+      <mat-icon>launch</mat-icon>
+      Add Project
+    </button>
+  </div>
+  <mat-table [dataSource]="projects" matSort [@animateStagger]="{ value: '50' }">
+    <!-- Column Title -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> <span>Title</span> </mat-header-cell>
+      <mat-cell
+        (click)="projectDetails(row.id)"
+        *matCellDef="let row"
+        class="striped"
+        [ngClass]="row.projectType?.name + '-bg'"
+      >
+        <span>{{ row.title }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column Description -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> <span>Description</span> </mat-header-cell>
+      <mat-cell (click)="projectDetails(row.id)" *matCellDef="let row">
+        <span>{{ row.description.substring(0, 50) }} ...</span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column Type -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef> <span>Type</span> </mat-header-cell>
+      <mat-cell (click)="projectDetails(row.id)" *matCellDef="let row">
+        <span>{{ row.projectType?.name }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column Price -->
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> <span>Price</span> </mat-header-cell>
+      <mat-cell (click)="projectDetails(row.id)" *matCellDef="let row">
+        <span>{{ row.price | currency }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column Tasks -->
+    <ng-container matColumnDef="tasks">
+      <mat-header-cell *matHeaderCellDef> <span>Tasks</span> </mat-header-cell>
+      <mat-cell (click)="projectDetails(row.id)" *matCellDef="let row">
+        <span>{{ row.tasks }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column completed tasks -->
+    <ng-container matColumnDef="completedTasks">
+      <mat-header-cell *matHeaderCellDef> <span>Completed Tasks</span> </mat-header-cell>
+      <mat-cell (click)="projectDetails(row.id)" *matCellDef="let row">
+        <span>{{ row.completedTasks }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column Actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> <span>Actions</span> </mat-header-cell>
+      <mat-cell *matCellDef="let row" matTooltip="Actions">
+        <div>
+          <button mat-button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editProject(row)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="deleteProject(row.id)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      class="element-row"
+      *matRowDef="let row; columns: displayedColumns"
+      (mouseover)="row.hovered = true"
+      (mouseout)="row.hovered = false"
+      [@animate]="{ value: '*', params: { y: '100%' } }"
+    ></mat-row>
+  </mat-table>
+  <app-paginator
+    [showing]="showing"
+    [length]="total"
+    [pageSize]="perPage"
+    [resetPage]="resetPage.asObservable()"
+    (changeEvent)="pageChange($event)"
+  >
+  </app-paginator>
+</div>

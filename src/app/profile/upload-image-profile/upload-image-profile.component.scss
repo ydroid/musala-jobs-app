@@ -1,0 +1,33 @@
+@import "src/theme/theme-variables";
+
+.images {
+  height: 50px;
+  width: 175px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.images-container {
+  border: 1px solid mat-color($app-primary);
+  height: 150px;
+  width: 150px;
+  margin-top: 10px;
+  // cursor: pointer;
+
+  span {
+    color: mat-color($app-primary);
+    font-size: 0.875rem;
+  }
+}
+
+.remove-image-icon {
+  font-size: 10px;
+  color: mat-color($app-primary);
+  cursor: pointer;
+}
+
+.responsive-img {
+  width: 100%;
+  max-width: 160px;
+  // max-height: 50px;
+  height: auto;
+}

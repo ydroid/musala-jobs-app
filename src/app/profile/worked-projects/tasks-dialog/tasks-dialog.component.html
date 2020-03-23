@@ -1,0 +1,17 @@
+<div class="mat-typography">
+  <h2 mat-dialog-title>Completed Tasks</h2>
+  <form (ngSubmit)="save()" [formGroup]="projectForm" novalidate>
+    <mat-dialog-content fxLayout="column" fxLayoutGap="5px">
+      <mat-form-field>
+        <input type="number" formControlName="completedTasks" matInput placeholder="Completed Tasks" />
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="5px">
+      <button mat-raised-button color="primary" [disabled]="projectForm.invalid || isLoading">
+        <app-loader class="inline-loader" [isLoading]="isLoading" size="0.75"></app-loader>
+        <span>Save</span>
+      </button>
+      <button mat-raised-button type="button" (click)="close(false)">Close</button>
+    </mat-dialog-actions>
+  </form>
+</div>

@@ -1,0 +1,26 @@
+<div fxLayout="row">
+  <div>
+    <div fxLayout="row" fxLayoutAlign="start start" *ngIf="url">
+      <ngx-avatar [size]="110" [src]="url"></ngx-avatar>
+      <div class="remove-image-icon" (click)="removeImage()">
+        <mat-icon style="font-size: 12px; color: white">clear</mat-icon>
+      </div>
+    </div>
+  </div>
+  <div style="width: 134px; cursor: pointer;" *ngIf="!url">
+    <ngx-avatar
+      [name]="name"
+      [size]="110"
+      onclick="document.getElementById('upload').click(); return false"
+    ></ngx-avatar>
+  </div>
+  <input
+    #fileInput
+    id="upload"
+    type="file"
+    ngFileSelect
+    [uploadInput]="uploadInput"
+    (change)="changeListener($event)"
+    style="visibility: hidden; width: 1px; height: 1px"
+  />
+</div>

@@ -1,0 +1,19 @@
+:host ::ng-deep .mat-paginator {
+  background-color: transparent;
+}
+
+.results {
+  padding-left: 8px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.54);
+  span {
+    color: #2196f3;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+.half-width {
+  width: 50%;
+}

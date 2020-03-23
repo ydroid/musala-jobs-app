@@ -1,0 +1,138 @@
+@import "src/theme/theme-variables";
+
+#project {
+  .header {
+    height: 220px;
+    min-height: 220px;
+    max-height: 220px;
+    background: rgb(51, 63, 192);
+    background: linear-gradient(to right, #0e2a3b 0%, #34306b 100%);
+    background: url("/assets/summer.jpg");
+    background-size: cover;
+    padding: 24px;
+  }
+  .name {
+    font-size: 34px;
+    color: #ffffff;
+    line-height: normal;
+    text-shadow: 2px 2px black;
+    @include media-breakpoint("lt-sm") {
+      margin-bottom: 8px;
+    }
+  }
+  .subtitle {
+    color: rgba($color: #ffffff, $alpha: 0.5);
+
+    text-shadow: 2px 2px black;
+    @include media-breakpoint("sm") {
+      margin-bottom: 32px;
+    }
+    @include media-breakpoint("xs") {
+      margin-bottom: 32px;
+    }
+  }
+  .actions {
+    button {
+      text-transform: none;
+      padding: 0 16px;
+      margin: 0 0 0 8px;
+    }
+  }
+  .content {
+    flex: 1;
+    padding: 24px;
+    .cards {
+      width: 100%;
+      .widget {
+        flex: 1 1 25%;
+        width: 25%;
+        max-width: 25%;
+        min-width: 300px;
+        @include media-breakpoint("md") {
+          margin-bottom: 10px;
+        }
+        @include media-breakpoint("sm") {
+          margin-bottom: 10px;
+          width: 100%;
+          max-width: 25%;
+          min-width: 100%;
+        }
+        @include media-breakpoint("xs") {
+          margin-bottom: 10px;
+          width: 100%;
+          max-width: 25%;
+          min-width: 100%;
+        }
+
+        .front {
+          border: 1px solid rgba($color: #000000, $alpha: 0.12);
+          background: white;
+          border-radius: 8px;
+          .header-card {
+            padding: 16px;
+            height: 52px;
+            .h3 {
+              font-size: 16px;
+              font-weight: normal;
+              color: rgba($color: #000000, $alpha: 0.87);
+            }
+          }
+          .content {
+            .task-text {
+              line-height: 72px;
+              font-size: 72px;
+              &.blue {
+                color: #03a9f4;
+              }
+              &.red {
+                color: #f44336;
+              }
+              &.gray {
+                color: gray;
+              }
+            }
+            .secondary-text {
+              font-weight: 500;
+              font-size: 16px;
+              color: rgba($color: #000000, $alpha: 0.54);
+            }
+          }
+          .border-top {
+            border-top: 1px solid rgba($color: #000000, $alpha: 0.12);
+            padding: 16px;
+
+            font-weight: normal;
+            font-size: 15px;
+            .secondary-text {
+              color: rgba($color: #000000, $alpha: 0.54);
+            }
+          }
+        }
+      }
+    }
+    .description {
+      margin-top: 14px;
+      background-color: white;
+      border-radius: 8px;
+      width: 100%;
+      border: 1px solid rgba($color: #000000, $alpha: 0.12);
+      .header-card {
+        padding: 16px;
+        height: 52px;
+      }
+      .content {
+        border-top: 1px solid rgba($color: #000000, $alpha: 0.12);
+        padding: 16px;
+      }
+    }
+  }
+}
+
+.container {
+  text-align: center;
+  padding: 1rem;
+}
+
+.inline-loader {
+  display: inline-block;
+}

@@ -1,0 +1,29 @@
+<div fxLayout="row" class="content" [fxLayoutAlign]="align">
+  <div class="projects" fxLayout="row" [fxLayoutAlign]="projectsAlign" [@animateStagger]="{ value: '50' }">
+    <div class="project" *ngFor="let item of projectList" [@animate]="{ value: '*', params: { y: '100%' } }">
+      <div class="project-content" fxLayout="column" fxFlex="1 1 auto">
+        <div class="header" fxLayout="row" fxLayoutAlign="center center" [ngClass]="item.projectType?.name + '-bg'">
+          <div class="category" fxFlex>
+            {{ item.projectType?.name }}
+          </div>
+
+          <div class="length" fxLayout="row" fxLayoutAlign="center center">
+            <div class="min">{{ item.price | currency }}</div>
+          </div>
+        </div>
+        <div class="content" fxLayout="column" fxLayoutAlign="center center" fxFlex="1 1 auto">
+          <div class="h1">{{ item.title }}</div>
+          <div class="updated" fxLayoutAlign="center center">{{ item.description.substring(0, 50) }} ...</div>
+        </div>
+        <div class="footer" fxLayout="row" fxLayoutAlign="center center">
+          <button mat-button color="accent" [routerLink]="'/project/' + item.id">
+            VIEW
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="no-projects" *ngIf="projectList?.length === 0">
+      No Projects found!
+    </div>
+  </div>
+</div>

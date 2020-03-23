@@ -1,0 +1,79 @@
+@import "src/theme/theme-variables";
+
+:host {
+  display: flex;
+  flex: 1;
+  background-color: #f5f5f5;
+}
+
+.full-width {
+  display: flex;
+  flex: 1 0 auto;
+  width: 100%;
+  -webkit-box-flex: 1;
+}
+
+#projectsList {
+  .projects-wrap {
+    margin-top: 26px;
+    max-width: 80%;
+    margin: 26px 10% 0 10%;
+    @include media-breakpoint("sm") {
+      margin: 26px 10% 0 10%;
+    }
+  }
+  .header {
+    flex: 1 0 auto;
+    height: 320px;
+    max-height: 320px;
+    background: rgb(51, 63, 192);
+    background: linear-gradient(to right, #0e2a3b 0%, #34306b 100%);
+    overflow: hidden;
+    .hero-icon {
+      position: absolute;
+      color: whitesmoke;
+      left: 40px;
+      opacity: 0.06;
+      font-size: 480px !important;
+      width: 480px !important;
+      height: 480px !important;
+    }
+    .hero-text {
+      margin: 60px 0 34px 0px;
+      text-align: center;
+
+      h1 {
+        color: white;
+        font-size: 48px;
+        font-weight: 400;
+        letter-spacing: 0.01em;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 16px;
+      }
+      span {
+        color: white;
+      }
+    }
+    .search {
+      z-index: 10;
+      width: 100%;
+      max-width: 640px;
+      height: 56px;
+      background-color: white;
+      line-height: 56px;
+      padding: 24px;
+      border-radius: 28px;
+      margin: 64px 24px;
+      mat-icon {
+        cursor: pointer;
+      }
+      input {
+        height: 56px;
+        padding-left: 16px;
+        border: none;
+        outline: none;
+      }
+    }
+  }
+}

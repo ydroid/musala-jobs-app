@@ -1,0 +1,72 @@
+<div id="profile" class="page-layout simple tabbed mat-typography">
+  <!-- HEADER -->
+  <div
+    class="header"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayout.gt-sm="row"
+    fxLayoutAlign.gt-sm="space-between end"
+  >
+    <div
+      class="user-info"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="start center"
+      [@animate]="{ value: '*', params: { delay: '50ms', scale: '0.2' } }"
+    >
+      <div class="profile-image" [@animate]="{ value: '*', params: { delay: '100ms', x: '-25px' } }">
+        <app-upload-image-profile
+          [url]="account?.avatarUrl"
+          [name]="this.account?.firstName + ' ' + this.account?.lastName"
+          (imageAdded)="onImageAdded($event)"
+          (imageRemoved)="onImageRemoved()"
+        >
+        </app-upload-image-profile>
+      </div>
+      <div fxLayout="column">
+        <div class="name">
+          {{ this.account?.firstName + ' ' + this.account?.lastName }}
+        </div>
+
+        <div class="subtitle">
+          {{ this.account?.email }}
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="actions"
+      fxLayout="row"
+      fxLayoutAlign="end center"
+      [@animate]="{ value: '*', params: { delay: '200ms' } }"
+    >
+      <button mat-raised-button color="accent" *ngIf="router.url === '/profile'" (click)="editProfile()">
+        <mat-icon>edit</mat-icon>
+        Edit Profile
+      </button>
+      <button mat-raised-button color="primary" aria-label="Add Project" (click)="addProject()">
+        <mat-icon>launch</mat-icon>
+        Add Project
+      </button>
+    </div>
+  </div>
+  <!-- / HEADER -->
+
+  <!-- CONTENT -->
+  <div class="content">
+    <mat-tab-group dynamicHeight="true">
+      <mat-tab label="My Projects">
+        <ng-template matTabContent>
+          <app-my-projects [accountId]="account?.id" [addedProject]="addedProject.asObservable()"></app-my-projects>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Worked On">
+        <ng-template matTabContent>
+          <app-worked-projects [accountId]="account?.id"></app-worked-projects>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <!-- / CONTENT -->
+</div>

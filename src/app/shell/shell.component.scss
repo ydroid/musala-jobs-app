@@ -1,0 +1,51 @@
+:host {
+  display: flex;
+  flex: 1;
+}
+
+.mat-sidenav {
+  min-width: 270px;
+  max-width: 28%;
+}
+
+.has-border {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-list {
+  padding-top: 0;
+}
+
+.mat-list-item {
+  text-decoration: none;
+  &.active {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  .mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 20px;
+    margin-right: 20px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+.menu-button {
+  margin-right: 1rem;
+}
+// .app-bar {
+//   z-index: 1201;
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+// }
+.content-mobile {
+  padding-top: 56px;
+}
+.content {
+  padding-top: 64px;
+}

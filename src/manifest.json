@@ -1,0 +1,21 @@
+{
+  "name": "Musala Jobs",
+  "short_name": "Musala Jobs",
+  "theme_color": "#488aff",
+  "background_color": "#488aff",
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "assets/entity-system-management@512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/entity-system-management@192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

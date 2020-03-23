@@ -1,0 +1,67 @@
+@import "src/theme/theme-variables";
+
+#profile {
+  .header {
+    height: 220px;
+    min-height: 220px;
+    max-height: 220px;
+    background: rgb(51, 63, 192);
+    background: url("/assets/winter.jpg") no-repeat;
+    background-size: cover;
+    padding: 24px;
+    @include media-breakpoint("sm") {
+      height: 320px;
+      min-height: 320px;
+      max-height: 320px;
+      margin: 0 0 16px 0;
+    }
+  }
+  .profile-image {
+    margin-right: 24px;
+    @include media-breakpoint("sm") {
+      margin: 0 0 16px 0;
+    }
+  }
+  .name {
+    font-size: 34px;
+    color: #ffffff;
+    line-height: normal;
+    text-shadow: 2px 1px black;
+    @include media-breakpoint("sm") {
+      margin-bottom: 32px;
+    }
+  }
+  .subtitle {
+    color: rgba($color: #ffffff, $alpha: 0.5);
+    text-shadow: 1px 1px black;
+    @include media-breakpoint("sm") {
+      margin-bottom: 32px;
+    }
+  }
+  .actions {
+    button {
+      text-transform: none;
+      padding: 0 16px;
+      margin: 0 0 0 8px;
+    }
+  }
+  .content {
+    flex: 1;
+    mat-tab-group {
+      height: 100%;
+      padding: 0 24px;
+      .mat-tab-body-wrapper {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+.container {
+  text-align: center;
+  padding: 1rem;
+}
+
+.inline-loader {
+  display: inline-block;
+}
